@@ -32,18 +32,18 @@ class ExpenseController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Expense $expense): JsonResponse
+    public function show(string $id): JsonResponse
     {
-        $expense = Expense::findOrFail($expense);
+        $expense = Expense::findOrFail($id);
         return response()->json($expense, Response::HTTP_OK);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(SaveExpenseRequest $request, Expense $expense): JsonResponse
+    public function update(SaveExpenseRequest $request, string $id): JsonResponse
     {
-        $expense = Expense::findOrFail($expense);
+        $expense = Expense::findOrFail($id);
         $expense->update($request->validated());
         return response()->json($expense, Response::HTTP_OK);
     }
@@ -51,9 +51,9 @@ class ExpenseController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Expense $expense): JsonResponse
+    public function destroy(string $id): JsonResponse
     {
-        $expense = Expense::findOrFail($expense);
+        $expense = Expense::findOrFail($id);
         $expense->delete();
         return response()->json(null, Response::HTTP_NO_CONTENT);
     }
